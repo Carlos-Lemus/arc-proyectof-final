@@ -2,7 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="desserts"
-    class="elevation-1"
+    class="elevation-6"
   >
     <template v-slot:[getitemcontrols()]="{ item }">
       <v-chip
@@ -24,7 +24,7 @@
           {
             text: 'Fecha',
             align: 'start',
-            sortable: false,
+            sortable: true,
             value: 'fecha',
           },
           { text: 'Hora', value: 'hora' },
@@ -34,37 +34,37 @@
         ],
         desserts: [
           {
-            fecha: '12/23/2342',
+            fecha: '12/02/2021',
             hora: '12:34',
             temp: 36,
             resultado: "Negativo",
           },
           {
-            fecha: '12/23/2342',
+            fecha: '19/10/2021',
             hora: '10:34',
             temp: 37,
             resultado: "Negativo",
           },
           {
-            fecha: '12/23/2342',
+            fecha: '05/09/2021',
             hora: '11:34',
             temp: 34,
             resultado: "Negativo",
           },
           {
-            fecha: '12/23/2342',
+            fecha: '29/09/2021',
             hora: '16:34',
             temp: 39,
             resultado: "Positivo",
           },
           {
-            fecha: '12/23/2342',
+            fecha: '01/11/2021',
             hora: '09:34',
             temp: 45,
             resultado: "Positivo",
           },
           {
-            fecha: '12/23/2342',
+            fecha: '12/07/2021',
             hora: '15:34',
             temp: 39,
             resultado: "Positivo",

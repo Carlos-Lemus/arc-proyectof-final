@@ -34,12 +34,13 @@
       <v-row class="align-center justify-center">
         <v-window v-model="step" class="col-12">
           <v-window-item :value="0">
-            <h1>tabla</h1>
-            <tabla/>
+           
+            <tabla class="mt-10" />
           </v-window-item>
 
           <v-window-item :value="1">
-            <h1>graficas</h1>
+           
+            <graficas/>
           </v-window-item>
         </v-window>
       </v-row>
@@ -50,12 +51,14 @@
 <script>
 import AppLayout from "../layout/AppLayout.vue";
 import Tabla from "../components/Tabla.vue"
+import Graficas from "../components/Graficas.vue"
 
 export default {
   name: "Informe",
   components: {
     AppLayout,
     Tabla,
+    Graficas,
   },
   data: () => ({
     step: 0,
