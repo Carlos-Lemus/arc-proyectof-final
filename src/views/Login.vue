@@ -1,11 +1,10 @@
 <template>
-  <v-container fluid >
+  <v-container fluid>
     <v-row align="center" justify="center">
- 
-      <v-col cols="11" sm="8" md="6" class="" >
+      <v-col cols="11" sm="8" md="6" class="">
         <v-card class="elevation-6 mt-10" max-width="800px">
           <v-form v-model="isFormValid">
-            <v-row justify="center" >    
+            <v-row justify="center">
               <v-col cols="12" sm="10">
                 <v-card-text class="mt-5">
                   <h2 class="text-center text-h3">Bienvenido</h2>
@@ -42,11 +41,16 @@
                         color="blue"
                         block
                         x-large
-                        to="/informe"
+                        @click="login"
                       >
                         Ingresar
                       </v-btn>
                     </v-col>
+
+                    <v-alert v-if="messageError" text shaped type="error" icon="mdi-cloud-alert">
+                      {{ messageError }}
+                    </v-alert>
+
                   </v-row>
                 </v-card-text>
               </v-col>
@@ -54,27 +58,48 @@
           </v-form>
         </v-card>
       </v-col>
-    
     </v-row>
   </v-container>
 </template>
 
 <script>
 
+import { decodeToken } from '../helpers/decode-token';
+
 export default {
   name: "Login",
   data: () => ({
     isFormValid: false,
+    messageError: null,
     user: { username: "", password: "" },
     userRules: [(v) => !!v || "Ingresa tu nombre de usuario"],
     passwordRules: [(v) => !!v || "Ingrese tu clave"],
   }),
   methods: {
-  }
+    login() {
+      this.$services.api
+        .login(this.user)
+        .then((response) => {
+          if (response.data.success) {
+            const token = response.data.token;
+
+            const tokenData = decodeToken(token);
+
+            this.$store.dispatch('setUserAction', tokenData.data);
+
+            localStorage.setItem('token', token);
+
+            this.$router.push('/report');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.messageError = "El usuario o contraseña son incorrectos";
+        });
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-
-
 </style>

@@ -23,8 +23,8 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>{{ nombre }}</v-list-item-title>
-            <v-list-item-subtitle>{{ rol }}</v-list-item-subtitle>
+            <v-list-item-title>{{ FullName }}</v-list-item-title>
+            <v-list-item-subtitle>{{ Role }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -33,20 +33,16 @@
 
       <v-list>
         <v-list-item
-          @click="item.click"
-          v-for="item in items_usuario"
-          :key="item.title"
           link
-          :to="item.path"
-         
+          @click="signOut"
         >
           <v-list-item-icon>
-            <v-icon size="30">{{ item.icon }}</v-icon>
+            <v-icon size="30">mdi-exit-to-app</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>
               <!-- <router-link :to="item.path">{{ item.title }}</router-link> -->
-              {{ item.title }}
+              Salir
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -56,43 +52,30 @@
 </template>
 
 <script>
-import routersInfo from "../router/routers-info";
-
 export default {
   name: "AppMenuBarUser",
-  
-  mounted() {
-   /* this.nombre =
-      this.$store.getters.user.nombre + " " + this.$store.getters.user.apellido;
-    this.rol = this.$store.getters.user.role.nombreRol;*/
-  },
-  data() {
-    return {
-      nombre: "abc",
-      rol: "admin",
-      items_usuario: [
-        /*
-        { title: "Mi Cuenta", 
-          icon: "mdi-account-details",
-          path: routersInfo.account.path, 
-           click: () => {},
-        },*/
-        {
-          title: "Salir",
-          icon: "mdi-exit-to-app",
-          //click: () => this.signOut(),
-          path: "/",
-        },
-      ],
-    };
+  computed: {
+    FullName() {
+      if(!this.$store.getters.user) {
+        return '';
+      }
+
+      return this.$store.getters.user.firstName + ' ' + this.$store.getters.user.lastName;
+    },
+    Role() {
+      if(!this.$store.getters.user) {
+        return '';
+      }
+
+      return this.$store.getters.user.role.name;
+    },
   },
   methods: {
-   /* signOut() {
+    signOut() {
       localStorage.removeItem("token");
       this.$store.dispatch("setUserAction", null);
-      this.$store.dispatch("setLoginSignAction", false);
       this.$router.push("/");
-    },*/
+    },
   },
 };
 </script>

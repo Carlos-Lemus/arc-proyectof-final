@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routersInfo from './routers-info'
+import store from '../store';
 
 const keys = Object.keys(routersInfo);
 

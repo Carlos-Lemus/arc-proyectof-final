@@ -18,7 +18,6 @@ export const Rules = {
     ],
 
     test: (value = false) => {
-        console.log(value);
         return [
 
             v => !!v || 'Requerido',
@@ -49,7 +48,6 @@ export const Rules = {
     ],
     //verificar contraseña
     verificarpass: (value = false) => {
-        console.log(value);
         return [
         v => !!v || 'Requerido',
        // v => (v || '').length >= 8 || 'La contraseña debe tener minimo 8 caracteres',
@@ -76,38 +74,4 @@ export const Rules = {
         v => (v || '').length >= 3 || 'CVV incompleto',
     ],
 
-};
-
-export const rulesText = () => {
-    const rules = [];
-
-    const minLenght = 3;
-
-    if (minLenght) {
-        const rule = (v) =>
-            (v || "").length >= minLenght ||
-            `Se necesitan al menos ${minLenght} caracteres`;
-
-        rules.push(rule);
-    }
-
-    return rules;
-};
-
-export const rulesCantidad = () => {
-    const rules = [];
-
-    const minNum = 1;
-
-    if (minNum) {
-        const rule = (v) => {
-            if (!isNaN(parseFloat(v)) && v >= minNum) return true;
-
-            return "La cantidad debe ser mayor a cero";
-        };
-
-        rules.push(rule);
-    }
-
-    return rules;
 };
