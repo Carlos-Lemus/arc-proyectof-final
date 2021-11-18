@@ -108,8 +108,10 @@
 export default {
   name: "ReportTable",
   mounted() {
+    this.filterDataTable(this.date);
+
     this.$services.socketio.getSendTemp((payload) => {
-      if (payload) {
+      if (payload && this.date === this.dateCurrent) {
         this.records = [...this.records, payload];
 
         if (payload.temperature > 37) {
@@ -119,18 +121,15 @@ export default {
         }
       }
     });
-
-    const date = new Date().toLocaleDateString("fr-CA");
-
-    this.filterDataTable(date);
   },
   data() {
     return {
       search: "",
       menu: false,
-      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10),
+      date: new Date().toLocaleDateString("fr-CA"),
+      dateCurrent: new Date().toLocaleDateString(
+        "fr-CA"
+      ),
       headers: [
         {
           text: "Numero Persona",
