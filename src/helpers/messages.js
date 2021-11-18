@@ -13,7 +13,6 @@ export const toastMessage = (icon, title, text) => Swal.fire(({
 
 export const deleteMessage = (callback) => Swal.fire({
     title: '¿Estas seguro?',
-    // text: "You won't be able to revert this!",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#2196F3',

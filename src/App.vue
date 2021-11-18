@@ -14,23 +14,29 @@ export default {
   mounted() {
     const tokenLocal = localStorage.getItem("token");
 
-    this.$services.api
-      .verify(tokenLocal)
-      .then((response) => {
-        if (response.data.success) {
-          const token = response.data.token;
+    if (tokenLocal) {
+      this.$services.api
+        .verify(tokenLocal)
+        .then((response) => {
+          
+          if (response.data.success) {
+            
+            this.$services.socketio.initialize();
 
-          const tokenData = decodeToken(token);
+            const token = response.data.token;
 
-          this.$store.dispatch("setUserAction", tokenData.data);
+            const tokenData = decodeToken(token);
 
-          localStorage.setItem("token", token);
-        }
-      })
-      .catch(() => {
-        this.$store.dispatch("setUserAction", null);
-        localStorage.removeItem("token");
-      });
+            this.$store.dispatch("setUserAction", tokenData.data);
+
+            localStorage.setItem("token", token);
+          }
+        })
+        .catch(() => {
+          this.$store.dispatch("setUserAction", null);
+          localStorage.removeItem("token");
+        });
+    }
   },
 };
 </script>

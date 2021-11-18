@@ -7,10 +7,9 @@ export default class SocketIO {
 
     constructor(url) {
         this.url = url;
-        this.setup();
     }
 
-    setup() {
+    initialize() {
         this.socket = io(this.url);
     }
 

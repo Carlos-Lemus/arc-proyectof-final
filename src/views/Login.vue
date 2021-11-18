@@ -94,6 +94,8 @@ export default {
         .login(this.user)
         .then((response) => {
           if (response.data.success) {
+            this.$services.socketio.initialize();
+
             const token = response.data.token;
 
             const tokenData = decodeToken(token);

@@ -57,7 +57,7 @@
                   <v-text-field
                     v-model="computedDateFormatted"
                     label="Filtrar por fecha"
-                    hint="DD/MM/YYYY formate"
+                    hint="DD/MM/YYYY formato"
                     persistent-hint
                     prepend-icon="mdi-calendar"
                     readonly
