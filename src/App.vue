@@ -18,7 +18,7 @@ export default {
       this.$services.api
         .verify(tokenLocal)
         .then((response) => {
-          
+
           if (response.data.success) {
             
             this.$services.socketio.initialize();
@@ -34,8 +34,13 @@ export default {
         })
         .catch(() => {
           this.$store.dispatch("setUserAction", null);
+
           localStorage.removeItem("token");
+
         });
+    } else {
+      this.$store.dispatch("setUserAction", null);
+
     }
   },
 };

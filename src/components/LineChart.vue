@@ -9,6 +9,10 @@ export default {
       type: Array,
       required: true,
     },
+    label: {
+      type: String,
+      required: true,
+    },
   },
   mounted() {
     this.updateChart(this.data);
@@ -38,7 +42,7 @@ export default {
           ],
           datasets: [
             {
-              label: "Casos de temperatura alta en 2021",
+              label: this.label,
               backgroundColor: "#E53935",
               data,
             },

@@ -2,8 +2,16 @@
   <v-container style="max-width: 1200px">
     <h3 class="mb-6 text-h4">Grafica</h3>
     <v-card class="mx-auto text-center" max-width="900">
+      <v-col cols="3" class="mx-auto">
+        <v-select
+          v-model="year"
+          :items="years"
+          label="Filtrar por año"
+        ></v-select>
+      </v-col>
+
       <v-card-text>
-        <line-chart :data="Datacollection" />
+        <line-chart :data="Datacollection" :label="Label" />
       </v-card-text>
     </v-card>
   </v-container>
@@ -12,40 +20,48 @@
 <script>
 import LineChart from "./LineChart.vue";
 
-const gradients = [
-  ["#222"],
-  ["#42b3f4"],
-  ["red", "orange", "yellow"],
-  ["purple", "violet"],
-  ["#00c6ff", "#F0F", "#FF0"],
-  ["#f72047", "#ffd200", "#1feaea"],
-];
-
 export default {
   name: "GraphReport",
   components: {
     LineChart,
   },
   mounted() {
-    const year = new Date().getFullYear();
+    this.updateChart(this.year);
 
-    this.$services.api
-      .getRecordsData(year)
-      .then((response) => {
-        this.datacollection = response.data.monthsValues;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    for (let i = this.year; i >= 2000; i--) {
+      this.years.push(i);
+    }
   },
   data() {
     return {
       datacollection: [],
+      years: [],
+      year: new Date().getFullYear(),
     };
+  },
+  methods: {
+    updateChart(year) {
+      this.$services.api
+        .getRecordsData(year)
+        .then((response) => {
+          this.datacollection = response.data.monthsValues;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  watch: {
+    year: function (value) {
+      this.updateChart(value);
+    },
   },
   computed: {
     Datacollection() {
       return this.datacollection;
+    },
+    Label() {
+      return `Casos de temperatura alta en ${this.year}`;
     },
   },
 };

@@ -44,7 +44,7 @@
       <v-col cols="12" sm="12">
         <v-card class="pb-2 ma-3" elevation="10">
           <v-card-title class="justify-center pt-8">
-            <v-col cols="12" md="3">
+            <v-col cols="12" sm="4" md="3">
               <v-menu
                 v-model="menu"
                 :close-on-content-click="false"
