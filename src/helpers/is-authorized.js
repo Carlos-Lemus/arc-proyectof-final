@@ -1,11 +1,25 @@
 import store from '../store';
 
-export function isAuthorized(to, from, next) {
+const getUserState = async () => new Promise((resolve, reject) => {
+    if (store.state.user === undefined) {
+        const unwatch = store.watch(
+            () => store.state.user,
+            (value) => {
+                unwatch()
+                resolve(value)
+            }
+        )
+    } else {
+        resolve(store.state.user)
+    }
+});
 
-    const user = store.getters.user;
-    // console.log(store.getters['user'])
-    // console.log(store.state.user)
-    if(user) {
+
+export const isAuthorized = async (to, from, next) => {
+
+    const user = await getUserState();
+    
+    if (user) {
         if (to.path.includes('users') && user.role.name !== 'Administrador') {
             return next('/');
         }
@@ -13,8 +27,14 @@ export function isAuthorized(to, from, next) {
         if (to.path.includes('login')) {
             return next('/report');
         }
+    } else {
+        if (to.path !== '/' && !to.path.includes('login')) {
+            return next('/');
+        }
+        
     }
 
 
     next();
 }
+

@@ -5,23 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: null,
-    // isLoggedIn: false,
+    user: undefined,
   },
   mutations: {
-    // setLoginSign(state, value) {
-    //   state.isLoggedIn = value;
-    // },
 
     setUser(state, userData) {
       state.user = userData;
     },
   },
   actions: {
-    // setLoginSignAction(context) {
-    //   context.commit('setLogin');
-    // },
-
     setUserAction(context, userData) {
       context.commit('setUser', userData);
     },
@@ -31,9 +23,6 @@ export default new Vuex.Store({
     user(state) {
       return state.user;
     },
-    // isLoggedIn(state) {
-    //   return state.isLoggedIn;
-    // },
   },
   modules: {
   }

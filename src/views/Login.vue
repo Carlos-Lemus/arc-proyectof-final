@@ -1,11 +1,20 @@
 <template>
-  <v-container fluid>
-    <v-row align="center" justify="center">
-      <v-col cols="11" sm="8" md="6" class="">
-        <v-card class="elevation-6 mt-10" max-width="800px">
+  <v-container fill-heigth fluid>
+    <v-row align="center" class="bg" justify="center">
+      <v-col cols="12" sm="11" md="10" lg="8" xl="6">
+        <v-card class="elevation-6 mx-auto mt-10">
           <v-form v-model="isFormValid">
             <v-row justify="center">
-              <v-col cols="12" sm="10">
+              <v-col cols="12" sm="6" class="back rounded-bl-xl ">
+                <v-img
+                  min-height="100px"
+                  max-height="100%"
+                  max-width="450px"
+                  src="../assets/background-login.png"
+                  class="mx-auto"
+                ></v-img>
+              </v-col>
+              <v-col cols="12" sm="6">
                 <v-card-text class="mt-5">
                   <h2 class="text-center text-h3">Bienvenido</h2>
                   <h4 class="text-center grey--text text-h6">
@@ -47,10 +56,15 @@
                       </v-btn>
                     </v-col>
 
-                    <v-alert v-if="messageError" text shaped type="error" icon="mdi-cloud-alert">
+                    <v-alert
+                      v-if="messageError"
+                      text
+                      shaped
+                      type="error"
+                      icon="mdi-cloud-alert"
+                    >
                       {{ messageError }}
                     </v-alert>
-
                   </v-row>
                 </v-card-text>
               </v-col>
@@ -63,8 +77,7 @@
 </template>
 
 <script>
-
-import { decodeToken } from '../helpers/decode-token';
+import { decodeToken } from "../helpers/decode-token";
 
 export default {
   name: "Login",
@@ -85,11 +98,11 @@ export default {
 
             const tokenData = decodeToken(token);
 
-            this.$store.dispatch('setUserAction', tokenData.data);
+            this.$store.dispatch("setUserAction", tokenData.data);
 
-            localStorage.setItem('token', token);
+            localStorage.setItem("token", token);
 
-            this.$router.push('/report');
+            this.$router.push("/report");
           }
         })
         .catch((error) => {
@@ -102,4 +115,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.bg {
+  background: url("../assets/background.jpg") repeat-y center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.v-card {
+  max-width: 1000px;
+}
+
 </style>

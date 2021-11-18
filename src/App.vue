@@ -25,13 +25,11 @@ export default {
           this.$store.dispatch("setUserAction", tokenData.data);
 
           localStorage.setItem("token", token);
-
         }
       })
-      .catch((error) => {
-        this.$store.dispatch('setUserAction', null);
-        localStorage.removeItem('token');
-        this.$router.push("/login");
+      .catch(() => {
+        this.$store.dispatch("setUserAction", null);
+        localStorage.removeItem("token");
       });
   },
 };
