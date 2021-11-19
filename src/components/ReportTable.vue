@@ -172,7 +172,7 @@ export default {
     },
 
     getColor(temperature) {
-      if (temperature > 37) return "red";
+      if (temperature >= 38) return "red";
       else return "green";
     },
 
