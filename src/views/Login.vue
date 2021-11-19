@@ -6,7 +6,10 @@
           <v-form v-model="isFormValid">
             <v-row justify="center">
               <v-col cols="12" sm="6" class="back rounded-bl-xl ">
-                <v-img
+                  <!-- transition="fade-transition" -->
+                  <!-- transition="slide-x-transition" -->
+                <v-img 
+                  transition="fade-transition"
                   min-height="100px"
                   max-height="100%"
                   max-width="450px"
