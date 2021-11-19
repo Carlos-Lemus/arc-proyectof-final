@@ -72,6 +72,7 @@ export default {
   },
   methods: {
     signOut() {
+      this.$services.socketio.close();
       localStorage.removeItem("token");
       this.$store.dispatch("setUserAction", null);
       this.$router.push("/");

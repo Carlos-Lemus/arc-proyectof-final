@@ -13,6 +13,10 @@ export default class SocketIO {
         this.socket = io(this.url);
     }
 
+    close() {
+        this.socket.disconnect();
+    }
+
     getSendTemp(callback) {
         this.socket.on('/socket/sendTemp', (payload) => {
             callback(payload);

@@ -9,7 +9,7 @@
             <v-col cols="7">
               <v-card-title
                 class="text-h5 white--text green darken-1 fill-height"
-                >Temps Normales</v-card-title
+                >Tmps Normales</v-card-title
               >
             </v-col>
             <v-col cols="5" class="d-flex justify-center">
@@ -25,7 +25,7 @@
           <v-row no-gutters>
             <v-col cols="7">
               <v-card-title class="text-h5 white--text red darken-1 fill-height"
-                >Temps Altas</v-card-title
+                >Tmps Altas</v-card-title
               >
             </v-col>
             <v-col cols="5" class="d-flex justify-center">
