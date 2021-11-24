@@ -105,17 +105,21 @@
 </template>
 
 <script>
+import { alertMessage } from '../helpers/messages';
+
 export default {
   name: "ReportTable",
   mounted() {
     this.filterDataTable(this.date);
 
+      alertMessage(`Se detecto una temperatura alta\n Hora `);
     this.$services.socketio.getSendTemp((payload) => {
       if (payload && this.date === this.dateCurrent) {
         this.records = [...this.records, payload];
 
         if (payload.temperature > 37) {
           this.highs = this.highs + 1;
+          alertMessage(`Se detecto una temperatura alta\n Hora ${payload.hour}`);
         } else {
           this.normals = this.normals + 1;
         }
@@ -172,7 +176,7 @@ export default {
     },
 
     getColor(temperature) {
-      if (temperature >= 38) return "red";
+      if (temperature > 37) return "red";
       else return "green";
     },
 

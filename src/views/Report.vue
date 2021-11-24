@@ -65,6 +65,5 @@ export default {
   data: () => ({
     step: 0,
   }),
-  methods: {},
 };
 </script>
