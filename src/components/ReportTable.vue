@@ -112,7 +112,6 @@ export default {
   mounted() {
     this.filterDataTable(this.date);
 
-      alertMessage(`Se detecto una temperatura alta\n Hora `);
     this.$services.socketio.getSendTemp((payload) => {
       if (payload && this.date === this.dateCurrent) {
         this.records = [...this.records, payload];
